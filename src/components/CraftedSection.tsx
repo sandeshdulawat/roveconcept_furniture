@@ -93,7 +93,7 @@ export const CraftedSection: React.FC = () => {
                   {currentSlide.titleItalic}
                 </span>
                 {/* Google Font Montserrat with Weight 500 Applied */}
-                <span className="font-[family-name:var(--font-montserrat)] font-medium tracking-tight text-[#22201D] block">
+                <span className="font-[family-name:var(--font-montserrat)] font-semibold tracking-tight text-[#22201D] block">
                   {currentSlide.titleBold}
                 </span>
               </h2>
@@ -183,8 +183,8 @@ export const CraftedSection: React.FC = () => {
                     setActiveHotspot(null);
                   }}
                   className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 shrink-0 overflow-hidden rounded-xs border-2 transition-all duration-300 focus:outline-none ${isActive
-                      ? "border-zinc-900 scale-105 shadow-md z-10"
-                      : "border-transparent opacity-60 hover:opacity-100"
+                    ? "border-zinc-900 scale-105 shadow-md z-10"
+                    : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
