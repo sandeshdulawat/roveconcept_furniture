@@ -30,7 +30,7 @@ export const craftedSlides: CraftedSlide[] = [
     titleItalic: "crafted",
     titleBold: "for modern living with timeless appeal.",
     description: "Innovative furniture for the future of living.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1392&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     hotspots: [
       { id: "h1", x: 42, y: 76, title: "Kiyomi Solid Oak Table", price: "$2,495 CAD", productId: "kiyomi-dining-table" },
       { id: "h2", x: 78, y: 68, title: "Lumière Modular Sofa", price: "$4,195 CAD", productId: "luca-curved-sectional" },
@@ -84,7 +84,7 @@ export const CraftedSection: React.FC = () => {
       {/* Standard Content Width Limit (max-width: 1440px) */}
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-          
+
           {/* LEFT COLUMN: Editorial Typography & Links */}
           <div className="lg:col-span-4 space-y-6 flex flex-col justify-center pb-4">
             <div className="space-y-2">
@@ -92,8 +92,8 @@ export const CraftedSection: React.FC = () => {
                 <span className="font-serif italic font-light text-[#B38E3D] block text-4xl sm:text-5xl lg:text-6xl mb-1">
                   {currentSlide.titleItalic}
                 </span>
-                {/* Google Font Cormorant Garamond Applied */}
-                <span className="font-[family-name:var(--font-cormorant)] font-semibold tracking-tight text-[#22201D] block">
+                {/* Google Font Montserrat with Weight 500 Applied */}
+                <span className="font-[family-name:var(--font-montserrat)] font-medium tracking-tight text-[#22201D] block">
                   {currentSlide.titleBold}
                 </span>
               </h2>
@@ -182,11 +182,10 @@ export const CraftedSection: React.FC = () => {
                     setActiveSlideIndex(idx);
                     setActiveHotspot(null);
                   }}
-                  className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 shrink-0 overflow-hidden rounded-xs border-2 transition-all duration-300 focus:outline-none ${
-                    isActive
+                  className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 shrink-0 overflow-hidden rounded-xs border-2 transition-all duration-300 focus:outline-none ${isActive
                       ? "border-zinc-900 scale-105 shadow-md z-10"
                       : "border-transparent opacity-60 hover:opacity-100"
-                  }`}
+                    }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
