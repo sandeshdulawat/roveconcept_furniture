@@ -74,8 +74,8 @@ export interface UIState {
   openUserTray: () => void;
   closeUserTray: () => void;
   toggleUserTray: () => void;
-  userTrayView: "profile" | "orders";
-  setUserTrayView: (view: "profile" | "orders") => void;
+  userTrayView: "profile" | "orders" | "wishlist";
+  setUserTrayView: (view: "profile" | "orders" | "wishlist") => void;
 
   // Hero Active Feature Tab
   activeTab: number;
