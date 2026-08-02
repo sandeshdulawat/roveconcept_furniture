@@ -3,8 +3,23 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles, LogIn, ArrowRight } from "lucide-react";
+import {
+  Search,
+  User,
+  ShoppingBag,
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+  Sparkles,
+  LogIn,
+  ArrowRight,
+  Heart,
+  Globe,
+} from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
+import { WishlistDrawer } from "@/components/WishlistDrawer";
+import { LanguageModal } from "@/components/LanguageModal";
 
 export const Navbar: React.FC = () => {
   const { data: session } = useSession();
@@ -14,6 +29,10 @@ export const Navbar: React.FC = () => {
     cartCount,
     currency,
     toggleCurrencyModal,
+    language,
+    toggleLanguageModal,
+    wishlist,
+    toggleWishlistModal,
     activeNavHover,
     setActiveNavHover,
     openAuthModal,
@@ -108,8 +127,20 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
 
-            {/* Right: Currency, User Account, Shopping Bag */}
-            <div className="flex items-center space-x-6">
+            {/* Right: Language, Currency, Wishlist, User Account, Shopping Bag */}
+            <div className="flex items-center space-x-5">
+              {/* Language Switcher */}
+              <button
+                onClick={toggleLanguageModal}
+                className="flex items-center space-x-1 text-xs tracking-widest font-light hover:opacity-80 transition-opacity focus:outline-none text-shadow-nav"
+                title="Select Language"
+              >
+                <Globe className="w-3.5 h-3.5 opacity-80" />
+                <span className="font-medium text-xs tracking-wider">{language}</span>
+              </button>
+
+              <span className="text-white/20 text-xs">|</span>
+
               {/* Currency Switcher */}
               <button
                 onClick={toggleCurrencyModal}
@@ -117,6 +148,19 @@ export const Navbar: React.FC = () => {
               >
                 <span className="font-medium text-xs tracking-wider">{currency}</span>
                 <ChevronDown className="w-3 h-3 opacity-80" />
+              </button>
+
+              {/* Wishlist Heart Icon */}
+              <button
+                onClick={toggleWishlistModal}
+                className="flex items-center space-x-1 hover:opacity-80 transition-opacity focus:outline-none text-shadow-nav relative group"
+                aria-label="Saved Favorites"
+                title="Saved Wishlist"
+              >
+                <Heart className={`w-4 h-4 ${wishlist.length > 0 ? "fill-red-400 text-red-400" : "stroke-[1.5]"}`} />
+                {wishlist.length > 0 && (
+                  <span className="text-xs font-semibold text-red-400">{wishlist.length}</span>
+                )}
               </button>
 
               {/* User Account / Profile Icon */}
@@ -171,9 +215,7 @@ export const Navbar: React.FC = () => {
             </ul>
           </nav>
 
-          {/* ========================================================
-              DESKTOP MEGA MENU DROPDOWNS (SHOP & LIFESTYLE)
-             ======================================================== */}
+          {/* MEGA MENUS */}
           {activeNavHover === "SHOP" && (
             <div
               onMouseEnter={handleMouseEnterMenu}
@@ -407,7 +449,15 @@ export const Navbar: React.FC = () => {
             </span>
           </Link>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3.5">
+            <button
+              onClick={toggleWishlistModal}
+              className="p-1 focus:outline-none text-shadow-nav relative"
+              aria-label="Saved Wishlist"
+            >
+              <Heart className={`w-5 h-5 ${wishlist.length > 0 ? "fill-red-400 text-red-400" : "stroke-[1.5]"}`} />
+            </button>
+
             <button
               onClick={handleUserClick}
               className="p-1 focus:outline-none text-shadow-nav"
@@ -435,6 +485,10 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </header>
+
+      {/* Wishlist Drawer & Language Modal Overlay Mounts */}
+      <WishlistDrawer />
+      <LanguageModal />
 
       {/* ========================================================
           LUXURY MOBILE MENU TRAY OVERLAY
@@ -522,36 +576,32 @@ export const Navbar: React.FC = () => {
                 </div>
               ))}
             </nav>
-
-            <div
-              className="animate-link-stagger bg-gradient-to-r from-white/10 to-white/5 p-4 rounded-sm border border-white/15 flex items-center space-x-3"
-              style={{ animationDelay: "0.38s" }}
-            >
-              <Sparkles className="w-5 h-5 text-amber-200 shrink-0" />
-              <div>
-                <h5 className="text-xs font-medium tracking-wider text-white">
-                  Virtual Concierge Styling
-                </h5>
-                <p className="text-[11px] text-white/60 font-light mt-0.5">
-                  Book a 1-on-1 interior design consultation.
-                </p>
-              </div>
-            </div>
           </div>
 
           <div className="p-5 border-t border-white/10 bg-black space-y-4">
             <div className="flex items-center justify-between text-xs tracking-wider max-w-[900px] mx-auto">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  toggleCurrencyModal();
-                }}
-                className="flex items-center space-x-2 text-white/80 hover:text-white border border-white/20 px-3 py-1.5 rounded-xs"
-              >
-                <span className="text-[10px] text-white/50 uppercase">Region:</span>
-                <span className="font-semibold text-xs">{currency}</span>
-                <ChevronDown className="w-3 h-3" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    toggleLanguageModal();
+                  }}
+                  className="flex items-center space-x-1.5 text-white/80 hover:text-white border border-white/20 px-2.5 py-1.5 rounded-xs"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span className="font-semibold text-xs">{language}</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    toggleCurrencyModal();
+                  }}
+                  className="flex items-center space-x-1.5 text-white/80 hover:text-white border border-white/20 px-2.5 py-1.5 rounded-xs"
+                >
+                  <span className="font-semibold text-xs">{currency}</span>
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+              </div>
 
               {session?.user ? (
                 <div className="flex items-center space-x-3">

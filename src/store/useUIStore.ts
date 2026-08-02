@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Product } from "@/data/products";
 
 export interface CartItem {
   id: string;
@@ -10,6 +11,8 @@ export interface CartItem {
   selectedColor?: string;
   quantity: number;
 }
+
+export type SupportedLanguage = "EN" | "FR" | "JA" | "DE";
 
 export interface UIState {
   // Search
@@ -41,6 +44,21 @@ export interface UIState {
   updateCartQuantity: (id: string, delta: number) => void;
   clearCart: () => void;
 
+  // Saved Wishlist / Favorites System
+  wishlist: Product[];
+  isWishlistOpen: boolean;
+  toggleWishlistModal: () => void;
+  closeWishlistModal: () => void;
+  toggleWishlistItem: (product: Product) => void;
+  isInWishlist: (productId: string) => boolean;
+
+  // Multi-Language Regional Switcher (EN / FR / JA / DE)
+  language: SupportedLanguage;
+  isLanguageModalOpen: boolean;
+  setLanguage: (lang: SupportedLanguage) => void;
+  toggleLanguageModal: () => void;
+  closeLanguageModal: () => void;
+
   // Currency
   currency: string;
   setCurrency: (currency: string) => void;
@@ -59,7 +77,7 @@ export interface UIState {
   userTrayView: "profile" | "orders";
   setUserTrayView: (view: "profile" | "orders") => void;
 
-  // Hero Active Feature Tab (0: Luxury Eco Materials, 1: Handcrafted, 2: Curated Designs)
+  // Hero Active Feature Tab
   activeTab: number;
   setActiveTab: (index: number) => void;
 
@@ -174,6 +192,34 @@ export const useUIStore = create<UIState>((set, get) => ({
   },
 
   clearCart: () => set({ cartItems: [], cartCount: 0 }),
+
+  // Saved Wishlist / Favorites System
+  wishlist: [],
+  isWishlistOpen: false,
+  toggleWishlistModal: () => set((state) => ({ isWishlistOpen: !state.isWishlistOpen })),
+  closeWishlistModal: () => set({ isWishlistOpen: false }),
+  toggleWishlistItem: (product) => {
+    set((state) => {
+      const exists = state.wishlist.some((p) => p.id === product.id);
+      let newWishlist: Product[];
+      if (exists) {
+        newWishlist = state.wishlist.filter((p) => p.id !== product.id);
+      } else {
+        newWishlist = [...state.wishlist, product];
+      }
+      return { wishlist: newWishlist };
+    });
+  },
+  isInWishlist: (productId) => {
+    return get().wishlist.some((p) => p.id === productId);
+  },
+
+  // Multi-Language Regional Switcher
+  language: "EN",
+  isLanguageModalOpen: false,
+  setLanguage: (lang) => set({ language: lang, isLanguageModalOpen: false }),
+  toggleLanguageModal: () => set((state) => ({ isLanguageModalOpen: !state.isLanguageModalOpen })),
+  closeLanguageModal: () => set({ isLanguageModalOpen: false }),
 
   // Currency
   currency: "CAN",

@@ -17,6 +17,7 @@ import {
   MessageSquarePlus,
   X,
   ThumbsUp,
+  Heart,
 } from "lucide-react";
 import { Product, productsData } from "@/data/products";
 import { useUIStore } from "@/store/useUIStore";
@@ -78,7 +79,9 @@ const INITIAL_REVIEWS: ReviewItem[] = [
 
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product }) => {
   const router = useRouter();
-  const { addItemToCart } = useUIStore();
+  const { addItemToCart, toggleWishlistItem, isInWishlist } = useUIStore();
+  const isFav = isInWishlist(product.id);
+
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || "");
 
@@ -167,7 +170,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
           TOP NAVIGATION BAR & BACK BUTTON
          ======================================================== */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-        {/* Prominent Back Button */}
         <button
           onClick={() => router.back()}
           className="inline-flex items-center space-x-2 bg-white/10 hover:bg-white text-white hover:text-black px-4 py-2 text-xs font-semibold tracking-[0.2em] uppercase rounded-xs transition-colors group w-fit"
@@ -176,7 +178,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
           <span>BACK TO CATALOG</span>
         </button>
 
-        {/* Breadcrumb Navigation */}
         <div className="flex items-center space-x-2 text-xs text-white/50 font-light tracking-wider">
           <Link href="/" className="hover:text-white transition-colors">Home</Link>
           <ChevronRight className="w-3 h-3" />
@@ -186,11 +187,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
         </div>
       </div>
 
-      {/* ========================================================
-          PRODUCT DETAIL HERO GRID
-         ======================================================== */}
+      {/* PRODUCT DETAIL HERO GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* LEFT COLUMN: High-Resolution Product Image Gallery (7 Cols) */}
+        {/* LEFT COLUMN: Gallery */}
         <div className="lg:col-span-7 space-y-4">
           <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-xs bg-zinc-900 border border-white/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -225,7 +224,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
           )}
         </div>
 
-        {/* RIGHT COLUMN: Product Info, Delivery Checker & CTA (5 Cols) */}
+        {/* RIGHT COLUMN: Info & Actions */}
         <div className="lg:col-span-5 space-y-6">
           <div className="space-y-2 border-b border-white/10 pb-6">
             <span className="text-[10px] tracking-[0.25em] font-semibold text-white/50 uppercase">
@@ -269,8 +268,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
             </div>
           )}
 
-          {/* Add To Cart CTA Button */}
-          <div>
+          {/* Add To Cart & Wishlist Heart CTAs */}
+          <div className="flex items-center space-x-3">
             <button
               onClick={() =>
                 addItemToCart({
@@ -282,10 +281,22 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
                   selectedColor,
                 })
               }
-              className="w-full py-4 bg-amber-400 text-black text-xs font-bold tracking-[0.22em] uppercase hover:bg-amber-300 transition-all shadow-xl flex items-center justify-center space-x-2 rounded-xs"
+              className="flex-1 py-4 bg-amber-400 text-black text-xs font-bold tracking-[0.22em] uppercase hover:bg-amber-300 transition-all shadow-xl flex items-center justify-center space-x-2 rounded-xs"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>ADD TO SHOPPING BAG</span>
+            </button>
+
+            <button
+              onClick={() => toggleWishlistItem(product)}
+              className={`p-4 border rounded-xs transition-colors focus:outline-none ${
+                isFav
+                  ? "bg-red-500/20 border-red-500 text-red-400"
+                  : "bg-zinc-900 border-white/20 text-white hover:border-white"
+              }`}
+              title={isFav ? "Remove from Wishlist" : "Save to Wishlist"}
+            >
+              <Heart className={`w-4 h-4 ${isFav ? "fill-red-400 text-red-400" : ""}`} />
             </button>
           </div>
 
@@ -343,9 +354,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
         </div>
       </div>
 
-      {/* ========================================================
-          SIMILAR PRODUCTS SECTION ("PAIRS WONDERFULLY WITH")
-         ======================================================== */}
+      {/* SIMILAR PRODUCTS */}
       <section className="space-y-8 pt-8 border-t border-white/10">
         <div className="flex items-center justify-between">
           <div>
@@ -402,9 +411,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
         </div>
       </section>
 
-      {/* ========================================================
-          VERIFIED CLIENT REVIEWS SECTION
-         ======================================================== */}
+      {/* VERIFIED CLIENT REVIEWS */}
       <section className="space-y-8 pt-8 border-t border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-2">
@@ -429,7 +436,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
           </button>
         </div>
 
-        {/* Reviews List */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((rev) => (
             <div
@@ -437,7 +443,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
               className="bg-zinc-950 border border-white/10 p-6 rounded-xs space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
-                {/* Rating Stars */}
                 <div className="flex items-center justify-between">
                   <div className="flex space-x-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
@@ -473,9 +478,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
         </div>
       </section>
 
-      {/* ========================================================
-          WRITE A REVIEW MODAL
-         ======================================================== */}
+      {/* WRITE A REVIEW MODAL */}
       {isReviewModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-zinc-950 border border-white/20 max-w-lg w-full rounded-sm text-white p-6 sm:p-8 space-y-6 shadow-2xl animate-fade-in">
