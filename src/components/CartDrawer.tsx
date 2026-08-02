@@ -19,13 +19,11 @@ export const CartDrawer: React.FC = () => {
 
   const [shouldRender, setShouldRender] = useState(isCartOpen);
   const [isClosing, setIsClosing] = useState(false);
-  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
 
   useEffect(() => {
     if (isCartOpen) {
       setShouldRender(true);
       setIsClosing(false);
-      setCheckoutSuccess(false);
     } else if (shouldRender) {
       setIsClosing(true);
       const timer = setTimeout(() => {
@@ -40,15 +38,6 @@ export const CartDrawer: React.FC = () => {
   const subtotal = useMemo(() => {
     return cartItems.reduce((acc, item) => acc + item.numericPrice * item.quantity, 0);
   }, [cartItems]);
-
-  const handleCheckout = () => {
-    if (cartItems.length > 0) {
-      setCheckoutSuccess(true);
-      setTimeout(() => {
-        clearCart();
-      }, 2500);
-    }
-  };
 
   if (!shouldRender) return null;
 
@@ -88,21 +77,7 @@ export const CartDrawer: React.FC = () => {
 
           {/* Cart Content */}
           <div className="flex-1 px-6 py-6 overflow-y-auto space-y-4">
-            {checkoutSuccess ? (
-              <div className="text-center py-16 space-y-4 animate-fade-in">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h4 className="text-lg font-serif text-white">Order Placed Successfully!</h4>
-                <p className="text-xs text-white/70 font-light">
-                  Thank you for shopping with Rove Concepts. White-glove shipping confirmation sent to your email.
-                </p>
-                <button
-                  onClick={closeCart}
-                  className="inline-block px-6 py-2.5 bg-white text-black text-xs font-semibold tracking-widest uppercase"
-                >
-                  CONTINUE SHOPPING
-                </button>
-              </div>
-            ) : cartItems.length === 0 ? (
+            {cartItems.length === 0 ? (
               <div className="text-center py-16 space-y-4">
                 <ShoppingBag className="w-10 h-10 text-white/30 mx-auto" />
                 <p className="text-sm text-white/60 font-light tracking-wide">
@@ -187,7 +162,7 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           {/* Footer Checkout */}
-          {cartItems.length > 0 && !checkoutSuccess && (
+          {cartItems.length > 0 && (
             <div className="px-6 py-6 border-t border-white/10 space-y-4 bg-black">
               <div className="flex justify-between text-xs tracking-wider">
                 <span className="text-white/60">Estimated Subtotal</span>
@@ -199,13 +174,14 @@ export const CartDrawer: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>White-glove in-home delivery & 30-day trial included.</span>
               </div>
-              <button
-                onClick={handleCheckout}
+              <Link
+                href="/checkout"
+                onClick={closeCart}
                 className="w-full py-4 bg-amber-400 text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-amber-300 transition-colors flex items-center justify-center space-x-2 shadow-lg"
               >
                 <span>PROCEED TO CHECKOUT (${subtotal.toLocaleString()} CAD)</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
             </div>
           )}
         </div>
