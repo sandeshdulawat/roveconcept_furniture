@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
     { name: "SALE", href: "/sale", badge: "NEW", subtitle: "Curated Offers & Exclusives", hasMega: false },
     { name: "LIFESTYLE", href: "/lifestyle", hasMega: true, subtitle: "Interior Inspiration & Journal" },
     { name: "DISCOVER", href: "/discover", hasMega: false, subtitle: "Interactive Atelier Experience" },
-    { name: "SHOWROOM", href: "/", hasMega: false, subtitle: "Visit Our Spaces" },
+    { name: "SHOWROOM", href: "/showroom", hasMega: false, subtitle: "Visit Our Global Spaces" },
     { name: "OUTLET", href: "/sale", hasMega: false, subtitle: "Exclusive Archival Pieces" },
   ];
 
