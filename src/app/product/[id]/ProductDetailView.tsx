@@ -21,7 +21,7 @@ interface ProductDetailViewProps {
 }
 
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product }) => {
-  const { addToCart } = useUIStore();
+  const { addItemToCart } = useUIStore();
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || "");
 
@@ -168,8 +168,17 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
           {/* Add To Cart CTA Button */}
           <div>
             <button
-              onClick={addToCart}
-              className="w-full py-4 bg-white text-black text-xs font-semibold tracking-[0.22em] uppercase hover:bg-zinc-200 transition-all shadow-xl flex items-center justify-center space-x-2"
+              onClick={() =>
+                addItemToCart({
+                  productId: product.id,
+                  name: product.name,
+                  price: product.price,
+                  numericPrice: product.numericPrice,
+                  image: selectedImage || product.images[0],
+                  selectedColor,
+                })
+              }
+              className="w-full py-4 bg-white text-black text-xs font-semibold tracking-[0.22em] uppercase hover:bg-amber-300 transition-all shadow-xl flex items-center justify-center space-x-2"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>ADD TO SHOPPING BAG</span>

@@ -1,5 +1,16 @@
 import { create } from "zustand";
 
+export interface CartItem {
+  id: string;
+  productId: string;
+  name: string;
+  price: string;
+  numericPrice: number;
+  image: string;
+  selectedColor?: string;
+  quantity: number;
+}
+
 export interface UIState {
   // Search
   isSearchOpen: boolean;
@@ -9,13 +20,26 @@ export interface UIState {
   toggleSearch: () => void;
   setSearchQuery: (query: string) => void;
 
-  // Cart
+  // Cart & Shopping Bag System
   isCartOpen: boolean;
   cartCount: number;
+  cartItems: CartItem[];
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
   addToCart: () => void;
+  addItemToCart: (item: {
+    id?: string;
+    productId: string;
+    name: string;
+    price: string;
+    numericPrice: number;
+    image: string;
+    selectedColor?: string;
+  }) => void;
+  removeItemFromCart: (id: string) => void;
+  updateCartQuantity: (id: string, delta: number) => void;
+  clearCart: () => void;
 
   // Currency
   currency: string;
@@ -53,7 +77,18 @@ export interface UIState {
   setActiveNavHover: (menu: string | null) => void;
 }
 
-export const useUIStore = create<UIState>((set) => ({
+const DEFAULT_DEMO_ITEM: CartItem = {
+  id: "luca-curved-sectional-Cream Bouclé",
+  productId: "luca-curved-sectional",
+  name: "The Luca Curved Sectional Sofa",
+  price: "$3,695 CAD",
+  numericPrice: 3695,
+  image: "https://images.unsplash.com/photo-1664711942326-2c3351e215e6?q=80&w=1417&auto=format&fit=crop",
+  selectedColor: "Cream Bouclé",
+  quantity: 1,
+};
+
+export const useUIStore = create<UIState>((set, get) => ({
   // Search
   isSearchOpen: false,
   searchQuery: "",
@@ -62,13 +97,83 @@ export const useUIStore = create<UIState>((set) => ({
   toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
   setSearchQuery: (query) => set({ searchQuery: query }),
 
-  // Cart
+  // Cart & Shopping Bag System
   isCartOpen: false,
-  cartCount: 0,
+  cartCount: 1,
+  cartItems: [DEFAULT_DEMO_ITEM],
   openCart: () => set({ isCartOpen: true }),
   closeCart: () => set({ isCartOpen: false }),
   toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
-  addToCart: () => set((state) => ({ cartCount: state.cartCount + 1, isCartOpen: true })),
+
+  addToCart: () => {
+    const state = get();
+    state.addItemToCart({
+      productId: "luca-curved-sectional",
+      name: "The Luca Curved Sectional Sofa",
+      price: "$3,695 CAD",
+      numericPrice: 3695,
+      image: "https://images.unsplash.com/photo-1664711942326-2c3351e215e6?q=80&w=1417&auto=format&fit=crop",
+      selectedColor: "Cream Bouclé",
+    });
+  },
+
+  addItemToCart: (item) => {
+    set((state) => {
+      const itemId = item.id || `${item.productId}-${item.selectedColor || "default"}`;
+      const existingIndex = state.cartItems.findIndex((ci) => ci.id === itemId);
+
+      let newItems: CartItem[];
+      if (existingIndex > -1) {
+        newItems = state.cartItems.map((ci, idx) =>
+          idx === existingIndex ? { ...ci, quantity: ci.quantity + 1 } : ci
+        );
+      } else {
+        newItems = [
+          ...state.cartItems,
+          {
+            id: itemId,
+            productId: item.productId,
+            name: item.name,
+            price: item.price,
+            numericPrice: item.numericPrice,
+            image: item.image,
+            selectedColor: item.selectedColor,
+            quantity: 1,
+          },
+        ];
+      }
+
+      const totalCount = newItems.reduce((acc, ci) => acc + ci.quantity, 0);
+      return { cartItems: newItems, cartCount: totalCount, isCartOpen: true };
+    });
+  },
+
+  removeItemFromCart: (id) => {
+    set((state) => {
+      const newItems = state.cartItems.filter((ci) => ci.id !== id);
+      const totalCount = newItems.reduce((acc, ci) => acc + ci.quantity, 0);
+      return { cartItems: newItems, cartCount: totalCount };
+    });
+  },
+
+  updateCartQuantity: (id, delta) => {
+    set((state) => {
+      const newItems = state.cartItems
+        .map((ci) => {
+          if (ci.id === id) {
+            const newQty = ci.quantity + delta;
+            return newQty > 0 ? { ...ci, quantity: newQty } : null;
+          }
+          return ci;
+        })
+        .filter(Boolean) as CartItem[];
+
+      const totalCount = newItems.reduce((acc, ci) => acc + ci.quantity, 0);
+      return { cartItems: newItems, cartCount: totalCount };
+    });
+  },
+
+  clearCart: () => set({ cartItems: [], cartCount: 0 }),
 
   // Currency
   currency: "CAN",
