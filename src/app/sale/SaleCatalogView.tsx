@@ -190,11 +190,11 @@ export const SaleCatalogView: React.FC = () => {
       </div>
 
       {/* ========================================================
-          MAIN SALE GRID LAYOUT (Natural Synchronized Scroll + Sticky End)
+          MAIN SALE GRID LAYOUT (Sticky Sidebar + Products Grid)
          ======================================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-start">
-        {/* DESKTOP SIDEBAR FILTERS (3 Cols) */}
-        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10 sticky top-28 self-start">
+        {/* DESKTOP STICKY SIDEBAR FILTERS (3 Cols) - Custom Dark Theme Scrollbar */}
+        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto dark-scrollbar">
           {/* Sale Categories */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold tracking-[0.2em] text-white uppercase border-b border-white/10 pb-2 flex items-center justify-between">

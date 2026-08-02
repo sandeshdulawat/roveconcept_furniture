@@ -52,6 +52,30 @@ html, body {
   scrollbar-width: none;
 }
 
+/* Custom Sleek Dark/Black Theme Scrollbar */
+.dark-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: #09090b;
+  border-radius: 4px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+.dark-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a #09090b;
+}
+
 /* Glassmorphism & Translucent Backdrop */
 .glass-header {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 70%, rgba(0, 0, 0, 0) 100%);
