@@ -22,7 +22,7 @@ export const HeroSection: React.FC = () => {
 
   const defaultVideos = [
     "https://assets.mixkit.co/videos/34487/34487-720.mp4",
-    "https://assets.mixkit.co/videos/41539/41539-720.mp4",
+    "https://www.pexels.com/download/video/37634863",
     "https://assets.mixkit.co/videos/34484/34484-720.mp4",
   ];
 
@@ -31,7 +31,7 @@ export const HeroSection: React.FC = () => {
   useEffect(() => {
     if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       } else {
         videoRef.current.pause();
       }
