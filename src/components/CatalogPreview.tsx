@@ -31,7 +31,7 @@ export const catalogItems: CatalogItem[] = [
     id: "aura-boucle-accent-chair",
     name: "Aura Boucle Accent Chair",
     category: "Accent Seating",
-    price: "$1,495 CAD",
+    price: "$1,45 CAD",
     tag: "LIMITED EDITION",
     img: "https://plus.unsplash.com/premium_photo-1705169612592-32610774a5d0?q=80&w=1440&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
