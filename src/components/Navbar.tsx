@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
     { name: "LIFESTYLE", href: "/lifestyle", hasMega: true, subtitle: "Interior Inspiration & Journal" },
     { name: "DISCOVER", href: "/discover", hasMega: false, subtitle: "Interactive Atelier Experience" },
     { name: "SHOWROOM", href: "/showroom", hasMega: false, subtitle: "Visit Our Global Spaces" },
-    { name: "OUTLET", href: "/sale", hasMega: false, subtitle: "Exclusive Archival Pieces" },
+    { name: "OUTLET", href: "/outlet", badge: "VAULT", subtitle: "Certified Open-Box & Archival Vault", hasMega: false },
   ];
 
   const handleUserClick = () => {

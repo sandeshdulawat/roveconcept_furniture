@@ -8,6 +8,9 @@ export interface Product {
   originalPrice?: string;
   numericOriginalPrice?: number;
   isOnSale?: boolean;
+  isOutlet?: boolean;
+  condition?: "Mint Open-Box" | "Showroom Display" | "Archival Vault";
+  stockCount?: number;
   discountBadge?: string;
   tag: string;
   description: string;
@@ -78,11 +81,17 @@ export const productsData: Product[] = [
     name: "Lumière Velvet Modular Sofa",
     category: "Living Room",
     categorySlug: "sofas-sectionals",
-    price: "$4,195 CAD",
-    numericPrice: 4195,
-    tag: "NEW RELEASE",
+    price: "$2,495 CAD",
+    numericPrice: 2495,
+    originalPrice: "$4,195 CAD",
+    numericOriginalPrice: 4195,
+    isOutlet: true,
+    condition: "Showroom Display",
+    stockCount: 1,
+    discountBadge: "40% OFF",
+    tag: "OUTLET VAULT",
     description:
-      "Sculptural low-profile modular seating with pillowy deep channel quilting. Tailored in stain-resistant performance velvet.",
+      "Sculptural low-profile modular seating with pillowy deep channel quilting. Tailored in stain-resistant performance velvet. Showroom floor display in pristine condition.",
     dimensions: '124"W x 42"D x 27"H',
     materials: ["Italian Performance Velvet", "Kiln-Dried Hardwood", "Memory Foam Layer"],
     colors: [
@@ -122,6 +131,30 @@ export const productsData: Product[] = [
     ],
     seller: "Mumbai Warehouse",
   },
+  {
+    id: "aura-boucle-chair-outlet",
+    name: "Aura Boucle Swivel Chair - Open Box",
+    category: "Accent Seating",
+    categorySlug: "accent-chairs",
+    price: "$795 CAD",
+    numericPrice: 795,
+    originalPrice: "$1,495 CAD",
+    numericOriginalPrice: 1495,
+    isOutlet: true,
+    condition: "Mint Open-Box",
+    stockCount: 2,
+    discountBadge: "47% OFF",
+    tag: "OPEN BOX",
+    description:
+      "Inspected and certified mint open-box return in original packaging. Features full 360-degree swivel.",
+    dimensions: '34"W x 33"D x 28"H',
+    materials: ["Bouclé Fabric", "Steel Base"],
+    colors: [{ name: "Off-White Bouclé", hex: "#FAF8F5" }],
+    images: [
+      "https://plus.unsplash.com/premium_photo-1705169612592-32610774a5d0?q=80&w=1440&auto=format&fit=crop",
+    ],
+    seller: "Mumbai Warehouse",
+  },
 
   // 3. Coffee Tables
   {
@@ -155,11 +188,17 @@ export const productsData: Product[] = [
     name: "Palisade Solid Walnut Media Console",
     category: "Living Room",
     categorySlug: "tv-units-consoles",
-    price: "$2,695 CAD",
-    numericPrice: 2695,
-    tag: "FEATURED",
+    price: "$1,495 CAD",
+    numericPrice: 1495,
+    originalPrice: "$2,695 CAD",
+    numericOriginalPrice: 2695,
+    isOutlet: true,
+    condition: "Archival Vault",
+    stockCount: 1,
+    discountBadge: "45% OFF",
+    tag: "ARCHIVAL VAULT",
     description:
-      "Slatted tambour door media credenza with integrated cable management and soft-close push drawers.",
+      "Discontinued prototype walnut credenza featuring fluted tambour doors.",
     dimensions: '76"W x 18"D x 22"H',
     materials: ["Solid American Walnut", "Brushed Brass Legs"],
     colors: [
@@ -230,20 +269,21 @@ export const productsData: Product[] = [
     name: "Angelo Leather Dining Chair",
     category: "Dining Room",
     categorySlug: "dining-chairs",
-    price: "$695 CAD",
-    numericPrice: 695,
+    price: "$495 CAD",
+    numericPrice: 495,
     originalPrice: "$895 CAD",
     numericOriginalPrice: 895,
-    isOnSale: true,
-    discountBadge: "22% OFF",
-    tag: "SALE",
+    isOutlet: true,
+    condition: "Showroom Display",
+    stockCount: 4,
+    discountBadge: "45% OFF",
+    tag: "OUTLET EXCLUSIVE",
     description:
-      "Curved tub dining chair with brass accent legs and soft top-grain Italian leather cushioning.",
+      "Showroom floor sample chair wrapped in top-grain Italian leather with brass legs.",
     dimensions: '22"W x 23"D x 31"H',
     materials: ["Top-Grain Italian Leather", "Brushed Brass Stainless Steel Legs"],
     colors: [
       { name: "Midnight Black Leather", hex: "#1A1A1A" },
-      { name: "Cognac Tan Leather", hex: "#8F4E24" },
     ],
     images: [
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
@@ -251,29 +291,7 @@ export const productsData: Product[] = [
     seller: "Mumbai Warehouse",
   },
 
-  // 7. Sideboards & Credenzas
-  {
-    id: "atelier-walnut-sideboard",
-    name: "Atelier Artisanal Walnut Sideboard",
-    category: "Dining Room",
-    categorySlug: "sideboards",
-    price: "$2,995 CAD",
-    numericPrice: 2995,
-    tag: "ARTISANAL",
-    description:
-      "Master artisanal joinery credenza featuring fluted solid wood doors and soft-close brass hinges.",
-    dimensions: '72"W x 19"D x 32"H',
-    materials: ["Solid American Walnut", "Brass Handles"],
-    colors: [
-      { name: "Natural Walnut", hex: "#4A3B32" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80",
-    ],
-    seller: "Mumbai Warehouse",
-  },
-
-  // 8. Beds & Bedroom
+  // 7. Beds & Bedroom
   {
     id: "epure-boucle-bed",
     name: "Épure Bouclé Platform Bed",
@@ -299,47 +317,23 @@ export const productsData: Product[] = [
     seller: "Mumbai Warehouse",
   },
 
-  // 9. Office Desks
-  {
-    id: "sculpture-oak-desk",
-    name: "Sculptural Solid Oak Executive Desk",
-    category: "Office",
-    categorySlug: "desks",
-    price: "$1,995 CAD",
-    numericPrice: 1995,
-    originalPrice: "$2,495 CAD",
-    numericOriginalPrice: 2495,
-    isOnSale: true,
-    discountBadge: "20% OFF",
-    tag: "EXECUTIVE SALE",
-    description:
-      "Minimalist writing desk with rounded pill-shaped oak legs, hidden wire grommet, and felt-lined drawer.",
-    dimensions: '66"L x 30"W x 30"H',
-    materials: ["Solid White Oak", "Felt-Lined Drawers"],
-    colors: [
-      { name: "Natural Oak", hex: "#D6C0A5" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
-    ],
-    seller: "Mumbai Warehouse",
-  },
-
-  // 10. Lighting
+  // 8. Lighting
   {
     id: "lumiere-travertine-floor-lamp",
     name: "Lumière Travertine Arch Floor Lamp",
     category: "Lighting",
     categorySlug: "floor-lamps",
-    price: "$695 CAD",
-    numericPrice: 695,
+    price: "$495 CAD",
+    numericPrice: 495,
     originalPrice: "$950 CAD",
     numericOriginalPrice: 950,
-    isOnSale: true,
-    discountBadge: "27% OFF",
-    tag: "LIGHTING SALE",
+    isOutlet: true,
+    condition: "Mint Open-Box",
+    stockCount: 2,
+    discountBadge: "48% OFF",
+    tag: "OPEN BOX",
     description:
-      "Dramatic overhead brass arch lamp anchored by a solid travertine stone base with opal glass dome shade.",
+      "Certified open-box arch lamp anchored by a solid travertine stone base with opal glass dome shade.",
     dimensions: '82"H x 48" Reach | Base: 14" Diameter',
     materials: ["Travertine Marble Base", "Brushed Brass Arm", "Hand-Blown Glass Dome"],
     colors: [
@@ -347,32 +341,6 @@ export const productsData: Product[] = [
     ],
     images: [
       "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80",
-    ],
-    seller: "Mumbai Warehouse",
-  },
-
-  // 11. Decor & Rugs
-  {
-    id: "solstice-wool-rug",
-    name: "Solstice Hand-Tufted Wool Area Rug",
-    category: "Decor",
-    categorySlug: "rugs",
-    price: "$895 CAD",
-    numericPrice: 895,
-    originalPrice: "$1,295 CAD",
-    numericOriginalPrice: 1295,
-    isOnSale: true,
-    discountBadge: "31% OFF",
-    tag: "TEXTILE SALE",
-    description:
-      "Organic asymmetrical carved pile rug hand-tufted from 100% New Zealand wool.",
-    dimensions: '8\' x 10\'',
-    materials: ["100% New Zealand Wool", "Cotton Backing"],
-    colors: [
-      { name: "Ivory & Sand", hex: "#EAE5D9" },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
     ],
     seller: "Mumbai Warehouse",
   },
@@ -394,4 +362,8 @@ export function getProductsByCategorySlug(slug: string): Product[] {
 
 export function getSaleProducts(): Product[] {
   return productsData.filter((p) => p.isOnSale);
+}
+
+export function getOutletProducts(): Product[] {
+  return productsData.filter((p) => p.isOutlet);
 }
