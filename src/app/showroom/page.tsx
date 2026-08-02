@@ -14,7 +14,7 @@ export default function ShowroomPage() {
       <Navbar />
 
       {/* Main Showroom Container */}
-      <div className="pt-24">
+      <div className="pt-32 sm:pt-36">
         <Suspense
           fallback={
             <div className="max-w-[1600px] mx-auto px-6 py-24 text-center text-white/50 text-xs font-mono uppercase tracking-widest">

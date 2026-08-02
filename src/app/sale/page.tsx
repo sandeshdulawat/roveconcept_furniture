@@ -14,11 +14,11 @@ export default function SalePage() {
       <Navbar />
 
       {/* Main Sale Catalog Container */}
-      <div className="pt-24">
+      <div className="pt-32 sm:pt-36">
         <Suspense
           fallback={
             <div className="max-w-[1600px] mx-auto px-6 py-24 text-center text-amber-300 text-xs font-mono uppercase tracking-widest">
-              Loading Curated Sale Exclusives...
+              Loading Curated Sale Catalog...
             </div>
           }
         >

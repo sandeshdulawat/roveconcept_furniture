@@ -30,8 +30,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
       {/* Header Overlay */}
       <Navbar />
 
-      {/* Main Product Detail View with Pincode Delivery Checker */}
-      <div className="pt-24 pb-16">
+      {/* Main Product Detail View with clear top spacing below fixed Navbar */}
+      <div className="pt-32 sm:pt-36 pb-16">
         <ProductDetailView product={product} />
       </div>
 
