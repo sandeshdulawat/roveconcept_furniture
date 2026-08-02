@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles, LogIn } from "lucide-react";
+import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles, LogIn, ArrowRight } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
 
 export const Navbar: React.FC = () => {
@@ -171,165 +171,223 @@ export const Navbar: React.FC = () => {
             </ul>
           </nav>
 
-          {/* Desktop Mega Menu Dropdown */}
-          {activeNavHover && (
+          {/* ========================================================
+              DESKTOP MEGA MENU DROPDOWNS (SHOP & LIFESTYLE)
+             ======================================================== */}
+          {activeNavHover === "SHOP" && (
             <div
               onMouseEnter={handleMouseEnterMenu}
               onMouseLeave={handleMouseLeaveNav}
-              className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-white/15 text-white py-8 px-12 transition-all duration-300 shadow-2xl animate-fade-in"
+              className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-white/15 text-white py-10 px-8 lg:px-12 transition-all duration-300 shadow-2xl animate-fade-in z-50 max-h-[85vh] overflow-y-auto"
             >
-              <div className="max-w-[1440px] mx-auto grid grid-cols-4 gap-8 text-left">
-                <div>
-                  <h4 className="text-xs font-semibold tracking-[0.2em] text-white/60 uppercase mb-4">
+              <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-6 text-left">
+                {/* 1. Living Room */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Living Room
                   </h4>
-                  <ul className="space-y-2.5 text-xs tracking-wider font-light text-white/80">
-                    <li>
-                      <Link
-                        href="/product/luca-curved-sectional"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Sofas & Sectionals
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/aura-boucle-accent-chair"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Accent Chairs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/kiyomi-dining-table"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Coffee Tables
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/winston-dining-table-48"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        TV Units & Credenzas
-                      </Link>
-                    </li>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Sofas & Sectionals</Link></li>
+                    <li><Link href="/product/aura-boucle-accent-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Accent Chairs</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Coffee Tables</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">TV Units & Consoles</Link></li>
+                    <li><Link href="/product/dresden-sectional-sofa" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Ottomans & Benches</Link></li>
                   </ul>
                 </div>
-                <div>
-                  <h4 className="text-xs font-semibold tracking-[0.2em] text-white/60 uppercase mb-4">
+
+                {/* 2. Dining Room */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Dining Room
                   </h4>
-                  <ul className="space-y-2.5 text-xs tracking-wider font-light text-white/80">
-                    <li>
-                      <Link
-                        href="/product/kiyomi-dining-table"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Dining Tables
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/angelo-dining-chair"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Dining Chairs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/winston-dining-table-48"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Bar & Counter Stools
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/kiyomi-dining-table"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Sideboards
-                      </Link>
-                    </li>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Dining Tables</Link></li>
+                    <li><Link href="/product/angelo-dining-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Dining Chairs</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Sideboards</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Bar Stools</Link></li>
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Display Cabinets</Link></li>
                   </ul>
                 </div>
-                <div>
-                  <h4 className="text-xs font-semibold tracking-[0.2em] text-white/60 uppercase mb-4">
-                    Bedroom & Outdoor
+
+                {/* 3. Bedroom */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Bedroom
                   </h4>
-                  <ul className="space-y-2.5 text-xs tracking-wider font-light text-white/80">
-                    <li>
-                      <Link
-                        href="/product/luca-curved-sectional"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Beds & Headboards
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/aura-boucle-accent-chair"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Nightstands
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/dresden-sectional-sofa"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Outdoor Loungers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/product/winston-dining-table-48"
-                        onClick={() => setActiveNavHover(null)}
-                        className="hover:text-white transition-colors"
-                      >
-                        Outdoor Dining Sets
-                      </Link>
-                    </li>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Beds & Headboards</Link></li>
+                    <li><Link href="/product/aura-boucle-accent-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Nightstands</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Dressers</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Wardrobes</Link></li>
+                    <li><Link href="/product/dresden-sectional-sofa" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Benches</Link></li>
                   </ul>
                 </div>
-                <div className="bg-white/5 p-5 rounded-sm border border-white/10 flex flex-col justify-between">
+
+                {/* 4. Office */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Office
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Desks</Link></li>
+                    <li><Link href="/product/angelo-dining-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Office Chairs</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Bookcases</Link></li>
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Storage Cabinets</Link></li>
+                    <li><Link href="/product/dresden-sectional-sofa" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Shelving</Link></li>
+                  </ul>
+                </div>
+
+                {/* 5. Lighting */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Lighting
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/aura-boucle-accent-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Floor Lamps</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Table Lamps</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Pendant Lights</Link></li>
+                    <li><Link href="/product/angelo-dining-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Wall Lights</Link></li>
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Chandeliers</Link></li>
+                  </ul>
+                </div>
+
+                {/* 6. Decor */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Decor
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/product/aura-boucle-accent-chair" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Mirrors</Link></li>
+                    <li><Link href="/product/luca-curved-sectional" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Rugs</Link></li>
+                    <li><Link href="/product/dresden-sectional-sofa" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Cushions</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Vases</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Wall Art</Link></li>
+                  </ul>
+                </div>
+
+                {/* 7. Featured Collection Card */}
+                <div className="bg-gradient-to-br from-white/10 to-white/5 p-5 rounded-xs border border-white/15 flex flex-col justify-between space-y-4">
                   <div>
-                    <span className="text-[10px] tracking-widest uppercase font-semibold text-white/50">
+                    <span className="text-[9px] tracking-[0.22em] uppercase font-semibold text-amber-300 block">
                       FEATURED COLLECTION
                     </span>
-                    <h5 className="font-serif text-lg font-normal mt-1 mb-2">
-                      {activeNavHover === "LIFESTYLE"
-                        ? "Architectural Sanctuary"
-                        : "The Luca Curved Sofa"}
+                    <h5 className="font-serif text-base font-normal mt-1 mb-2 text-white">
+                      The Luca Curved Sofa
                     </h5>
-                    <p className="text-xs text-white/70 font-light">
-                      {activeNavHover === "LIFESTYLE"
-                        ? "Curated interior arrangements for modern luxury living."
-                        : "Handcrafted with boucle fabric & solid hardwood frame."}
+                    <p className="text-[11px] text-white/70 font-light leading-relaxed">
+                      Handcrafted with premium boucle fabric and solid hardwood frame.
                     </p>
                   </div>
                   <Link
                     href="/product/luca-curved-sectional"
                     onClick={() => setActiveNavHover(null)}
-                    className="inline-block mt-4 text-[11px] font-medium tracking-widest underline uppercase hover:text-white"
+                    className="inline-flex items-center space-x-1.5 text-[10px] font-medium tracking-[0.2em] text-white uppercase hover:text-amber-200 transition-colors pt-2 border-t border-white/10"
                   >
-                    Explore Collection
+                    <span>Explore Collection</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeNavHover === "LIFESTYLE" && (
+            <div
+              onMouseEnter={handleMouseEnterMenu}
+              onMouseLeave={handleMouseLeaveNav}
+              className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-white/15 text-white py-10 px-8 lg:px-12 transition-all duration-300 shadow-2xl animate-fade-in z-50 max-h-[85vh] overflow-y-auto"
+            >
+              <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 text-left">
+                {/* 1. Inspiration */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Inspiration
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Interior Trends</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Makeovers</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Design Inspiration</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Seasonal Collections</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Color Palettes</Link></li>
+                  </ul>
+                </div>
+
+                {/* 2. Guides */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Guides
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Buying Guides</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Furniture Care</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Material Guide</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Size & Layout Guide</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Styling Tips</Link></li>
+                  </ul>
+                </div>
+
+                {/* 3. Stories */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Stories
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Designer Interviews</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Customer Homes</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Behind the Craft</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Artisan Stories</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Brand Journal</Link></li>
+                  </ul>
+                </div>
+
+                {/* 4. Resources */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Resources
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Lookbooks</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Planner</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Catalog Download</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Fabric Swatches</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Finish Samples</Link></li>
+                  </ul>
+                </div>
+
+                {/* 5. Community */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
+                    Community
+                  </h4>
+                  <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">New Arrivals</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Featured Spaces</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Events</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Collaborations</Link></li>
+                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Press</Link></li>
+                  </ul>
+                </div>
+
+                {/* 6. Featured Story Card */}
+                <div className="bg-gradient-to-br from-white/10 to-white/5 p-5 rounded-xs border border-white/15 flex flex-col justify-between space-y-4">
+                  <div>
+                    <span className="text-[9px] tracking-[0.22em] uppercase font-semibold text-amber-300 block">
+                      FEATURED STORY
+                    </span>
+                    <h5 className="font-serif text-base font-normal mt-1 mb-2 text-white">
+                      Architectural Sanctuary
+                    </h5>
+                    <p className="text-[11px] text-white/70 font-light leading-relaxed">
+                      Explore beautifully curated living spaces designed for timeless modern luxury.
+                    </p>
+                  </div>
+                  <Link
+                    href="/product/luca-curved-sectional"
+                    onClick={() => setActiveNavHover(null)}
+                    className="inline-flex items-center space-x-1.5 text-[10px] font-medium tracking-[0.2em] text-white uppercase hover:text-amber-200 transition-colors pt-2 border-t border-white/10"
+                  >
+                    <span>Read Story</span>
+                    <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
