@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles, LogIn } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
@@ -64,14 +65,14 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Center: Brand Logo */}
+            {/* Center: Brand Logo - Redirects to Home Page (/) */}
             <div className="text-center cursor-pointer">
-              <a href="#" className="inline-block group focus:outline-none">
+              <Link href="/" className="inline-block group focus:outline-none" aria-label="Go to Home Page">
                 <span className="text-2xl lg:text-3xl font-light tracking-[0.25em] text-shadow-nav">
                   <strong className="font-semibold tracking-[0.25em]">ROVE</strong>
                   <span className="font-extralight tracking-[0.28em] opacity-95">CONCEPTS</span>
                 </span>
-              </a>
+              </Link>
             </div>
 
             {/* Right: Currency, User Account, Shopping Bag */}
@@ -120,8 +121,8 @@ export const Navbar: React.FC = () => {
                   onMouseLeave={() => setActiveNavHover(null)}
                   className="relative group"
                 >
-                  <a
-                    href="#"
+                  <Link
+                    href="/"
                     className="text-[12px] lg:text-[13px] tracking-[0.22em] font-normal text-white/90 hover:text-white transition-colors duration-200 uppercase py-1 text-shadow-nav block"
                   >
                     {link.name}
@@ -130,7 +131,7 @@ export const Navbar: React.FC = () => {
                         {link.badge}
                       </span>
                     )}
-                  </a>
+                  </Link>
                   <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
                 </li>
               ))}
@@ -150,10 +151,10 @@ export const Navbar: React.FC = () => {
                     Living Room
                   </h4>
                   <ul className="space-y-2 text-xs tracking-wider font-light text-white/80">
-                    <li><a href="#" className="hover:text-white transition-colors">Sofas & Sectionals</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Accent Chairs</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Coffee Tables</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">TV Units & Credenzas</a></li>
+                    <li><Link href="/product/luca-curved-sectional" className="hover:text-white transition-colors">Sofas & Sectionals</Link></li>
+                    <li><Link href="/product/aura-boucle-accent-chair" className="hover:text-white transition-colors">Accent Chairs</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" className="hover:text-white transition-colors">Coffee Tables</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" className="hover:text-white transition-colors">TV Units & Credenzas</Link></li>
                   </ul>
                 </div>
                 <div>
@@ -161,10 +162,10 @@ export const Navbar: React.FC = () => {
                     Dining Room
                   </h4>
                   <ul className="space-y-2 text-xs tracking-wider font-light text-white/80">
-                    <li><a href="#" className="hover:text-white transition-colors">Dining Tables</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Dining Chairs</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Bar & Counter Stools</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Sideboards</a></li>
+                    <li><Link href="/product/kiyomi-dining-table" className="hover:text-white transition-colors">Dining Tables</Link></li>
+                    <li><Link href="/product/angelo-dining-chair" className="hover:text-white transition-colors">Dining Chairs</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" className="hover:text-white transition-colors">Bar & Counter Stools</Link></li>
+                    <li><Link href="/product/kiyomi-dining-table" className="hover:text-white transition-colors">Sideboards</Link></li>
                   </ul>
                 </div>
                 <div>
@@ -172,10 +173,10 @@ export const Navbar: React.FC = () => {
                     Bedroom & Outdoor
                   </h4>
                   <ul className="space-y-2 text-xs tracking-wider font-light text-white/80">
-                    <li><a href="#" className="hover:text-white transition-colors">Beds & Headboards</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Nightstands</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Outdoor Loungers</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Outdoor Dining Sets</a></li>
+                    <li><Link href="/product/luca-curved-sectional" className="hover:text-white transition-colors">Beds & Headboards</Link></li>
+                    <li><Link href="/product/aura-boucle-accent-chair" className="hover:text-white transition-colors">Nightstands</Link></li>
+                    <li><Link href="/product/dresden-sectional-sofa" className="hover:text-white transition-colors">Outdoor Loungers</Link></li>
+                    <li><Link href="/product/winston-dining-table-48" className="hover:text-white transition-colors">Outdoor Dining Sets</Link></li>
                   </ul>
                 </div>
                 <div className="bg-white/5 p-4 rounded-sm border border-white/10 flex flex-col justify-between">
@@ -190,12 +191,12 @@ export const Navbar: React.FC = () => {
                       Handcrafted with boucle fabric & solid hardwood frame.
                     </p>
                   </div>
-                  <a
-                    href="#"
+                  <Link
+                    href="/product/luca-curved-sectional"
                     className="inline-block mt-4 text-[11px] font-medium tracking-widest underline uppercase hover:text-white"
                   >
                     Explore Collection
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -206,12 +207,13 @@ export const Navbar: React.FC = () => {
             MOBILE HEADER BAR (block md:hidden)
            ======================================================== */}
         <div className="md:hidden px-4 py-3.5 flex items-center justify-between">
-          <a href="#" className="focus:outline-none">
+          {/* Mobile Logo Link to Home Page (/) */}
+          <Link href="/" className="focus:outline-none" aria-label="Go to Home Page">
             <span className="text-lg font-light tracking-[0.2em] text-shadow-nav">
               <strong className="font-semibold tracking-[0.2em]">ROVE</strong>
               <span className="font-extralight tracking-[0.22em] opacity-95">CONCEPTS</span>
             </span>
-          </a>
+          </Link>
 
           <div className="flex items-center space-x-4">
             <button
@@ -248,10 +250,15 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-zinc-950 text-white flex flex-col justify-between animate-mobile-tray overflow-y-auto h-[100dvh] w-full">
           <div className="px-5 py-4 flex items-center justify-between border-b border-white/15 bg-zinc-900 sticky top-0 z-20">
-            <span className="text-lg font-light tracking-[0.22em]">
+            {/* Logo inside tray linking to Home Page (/) */}
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg font-light tracking-[0.22em]"
+            >
               <strong className="font-semibold tracking-[0.22em]">ROVE</strong>
               <span className="font-extralight opacity-90">CONCEPTS</span>
-            </span>
+            </Link>
 
             <button
               onClick={() => setMobileMenuOpen(false)}
@@ -297,8 +304,8 @@ export const Navbar: React.FC = () => {
                   className="animate-link-stagger border-b border-white/10 pb-2.5"
                   style={{ animationDelay: `${0.08 + idx * 0.04}s` }}
                 >
-                  <a
-                    href="#"
+                  <Link
+                    href="/"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-between group py-1"
                   >
@@ -319,7 +326,7 @@ export const Navbar: React.FC = () => {
                     </div>
 
                     <ChevronRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                  </a>
+                  </Link>
                 </div>
               ))}
             </nav>
@@ -354,7 +361,6 @@ export const Navbar: React.FC = () => {
                 <ChevronDown className="w-3 h-3" />
               </button>
 
-              {/* Mobile Account / Login Button */}
               {session?.user ? (
                 <div className="flex items-center space-x-3">
                   <button
