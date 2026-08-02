@@ -92,8 +92,8 @@ export const CraftedSection: React.FC = () => {
                 <span className="font-serif italic font-light text-[#B38E3D] block text-4xl sm:text-5xl lg:text-6xl mb-1">
                   {currentSlide.titleItalic}
                 </span>
-                {/* Google Font Montserrat Explicitly Applied */}
-                <span className="font-[family-name:var(--font-montserrat)] font-bold tracking-tight text-[#22201D] block">
+                {/* Google Font Cormorant Garamond Applied */}
+                <span className="font-[family-name:var(--font-cormorant)] font-semibold tracking-tight text-[#22201D] block">
                   {currentSlide.titleBold}
                 </span>
               </h2>
