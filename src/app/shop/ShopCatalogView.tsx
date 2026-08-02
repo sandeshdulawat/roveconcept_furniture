@@ -224,13 +224,14 @@ export const ShopCatalogView: React.FC = () => {
       </div>
 
       {/* ========================================================
-          MAIN CATALOG LAYOUT (Sidebar Filters + Products Grid)
+          MAIN CATALOG LAYOUT (Sticky Sidebar + Products Grid)
          ======================================================== */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-start">
         {/* ========================================================
-            DESKTOP SIDEBAR FILTER COLUMN (3 Cols)
+            DESKTOP STICKY SIDEBAR FILTER COLUMN (3 Cols)
+            - Pinned during scroll until bottom of product grid
            ======================================================== */}
-        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10">
+        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto">
           {/* Categories Filter list */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold tracking-[0.2em] text-white uppercase border-b border-white/10 pb-2">
@@ -292,7 +293,7 @@ export const ShopCatalogView: React.FC = () => {
           </div>
 
           {/* Price Range Filter Slider */}
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-2 pb-4">
             <h3 className="text-xs font-semibold tracking-[0.2em] text-white uppercase border-b border-white/10 pb-2">
               MAX PRICE: <strong className="text-amber-300">${maxPriceFilter} CAD</strong>
             </h3>
