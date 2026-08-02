@@ -26,11 +26,11 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: "SHOP", href: "/shop", hasMega: true, subtitle: "Full Luxury Catalog" },
-    { name: "SALE", href: "/shop?tag=SALE", badge: "NEW", subtitle: "Curated Offers", hasMega: false },
+    { name: "SALE", href: "/sale", badge: "NEW", subtitle: "Curated Offers & Exclusives", hasMega: false },
     { name: "LIFESTYLE", href: "/", hasMega: true, subtitle: "Interior Inspiration" },
     { name: "DISCOVER", href: "/", hasMega: false, subtitle: "Brand Philosophy" },
     { name: "SHOWROOM", href: "/", hasMega: false, subtitle: "Visit Our Spaces" },
-    { name: "OUTLET", href: "/shop?tag=OUTLET", hasMega: false, subtitle: "Exclusive Archival Pieces" },
+    { name: "OUTLET", href: "/sale", hasMega: false, subtitle: "Exclusive Archival Pieces" },
   ];
 
   const handleUserClick = () => {
@@ -160,7 +160,7 @@ export const Navbar: React.FC = () => {
                   >
                     {link.name}
                     {link.badge && (
-                      <span className="ml-1.5 px-1.5 py-0.5 text-[9px] bg-white text-black font-semibold rounded-xs uppercase tracking-normal">
+                      <span className="ml-1.5 px-1.5 py-0.5 text-[9px] bg-amber-400 text-black font-bold rounded-xs uppercase tracking-normal">
                         {link.badge}
                       </span>
                     )}
@@ -507,7 +507,7 @@ export const Navbar: React.FC = () => {
                           {link.name}
                         </span>
                         {link.badge && (
-                          <span className="px-1.5 py-0.5 text-[9px] bg-white text-black font-semibold rounded-xs uppercase">
+                          <span className="px-1.5 py-0.5 text-[9px] bg-amber-400 text-black font-bold rounded-xs uppercase">
                             {link.badge}
                           </span>
                         )}

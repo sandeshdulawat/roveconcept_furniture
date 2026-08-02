@@ -5,6 +5,10 @@ export interface Product {
   categorySlug: string; // Filter slug (e.g. "sofas-sectionals", "accent-chairs", "dining-tables")
   price: string;
   numericPrice: number;
+  originalPrice?: string;
+  numericOriginalPrice?: number;
+  isOnSale?: boolean;
+  discountBadge?: string;
   tag: string;
   description: string;
   dimensions: string;
@@ -21,9 +25,13 @@ export const productsData: Product[] = [
     name: "The Luca Curved Sectional Sofa",
     category: "Living Room",
     categorySlug: "sofas-sectionals",
-    price: "$4,295 CAD",
-    numericPrice: 4295,
-    tag: "BESTSELLER",
+    price: "$3,695 CAD",
+    numericPrice: 3695,
+    originalPrice: "$4,295 CAD",
+    numericOriginalPrice: 4295,
+    isOnSale: true,
+    discountBadge: "14% OFF",
+    tag: "CURATED SALE",
     description:
       "Fluid, architectural curves meet sink-in luxury. Handcrafted with high-density foam cushioning, kiln-dried FSC® certified hardwood frame, and premium textured bouclé upholstery.",
     dimensions: '118"W x 64"D x 29"H | Seat Height: 16.5"',
@@ -44,9 +52,13 @@ export const productsData: Product[] = [
     name: "Dresden Modular Sectional Sofa",
     category: "Living Room",
     categorySlug: "sofas-sectionals",
-    price: "$3,895 CAD",
-    numericPrice: 3895,
-    tag: "BESTSELLER",
+    price: "$2,995 CAD",
+    numericPrice: 2995,
+    originalPrice: "$3,895 CAD",
+    numericOriginalPrice: 3895,
+    isOnSale: true,
+    discountBadge: "23% OFF",
+    tag: "LIMITED SALE",
     description:
       "Deep-seated modern sectional featuring integrated solid walnut side shelf tables and feather-down blend cushions.",
     dimensions: '132"W x 70"D x 28"H',
@@ -89,9 +101,13 @@ export const productsData: Product[] = [
     name: "Aura Boucle Accent Chair",
     category: "Accent Seating",
     categorySlug: "accent-chairs",
-    price: "$1,495 CAD",
-    numericPrice: 1495,
-    tag: "LIMITED EDITION",
+    price: "$1,095 CAD",
+    numericPrice: 1095,
+    originalPrice: "$1,495 CAD",
+    numericOriginalPrice: 1495,
+    isOnSale: true,
+    discountBadge: "27% OFF",
+    tag: "FLASH SALE",
     description:
       "An iconic cocoon silhouette designed for supreme lounge comfort. Features a 360-degree smooth swivel base and plush tactile bouclé fabric.",
     dimensions: '34"W x 33"D x 28"H | Seat Depth: 22"',
@@ -113,9 +129,13 @@ export const productsData: Product[] = [
     name: "Solstice Travertine Coffee Table",
     category: "Living Room",
     categorySlug: "coffee-tables",
-    price: "$1,895 CAD",
-    numericPrice: 1895,
-    tag: "ARCHITECTURAL",
+    price: "$1,495 CAD",
+    numericPrice: 1495,
+    originalPrice: "$1,895 CAD",
+    numericOriginalPrice: 1895,
+    isOnSale: true,
+    discountBadge: "21% OFF",
+    tag: "CURATED SALE",
     description:
       "Hand-carved Italian travertine coffee table with soft rounded bullnose edges and honed matte finish.",
     dimensions: '54"L x 32"W x 14"H',
@@ -157,9 +177,13 @@ export const productsData: Product[] = [
     name: "Kiyomi Solid Oak Dining Table",
     category: "Dining Room",
     categorySlug: "dining-tables",
-    price: "$2,895 CAD",
-    numericPrice: 2895,
-    tag: "NEW RELEASE",
+    price: "$2,195 CAD",
+    numericPrice: 2195,
+    originalPrice: "$2,895 CAD",
+    numericOriginalPrice: 2895,
+    isOnSale: true,
+    discountBadge: "24% OFF",
+    tag: "SPECIAL EVENT",
     description:
       "A sculptural pedestal dining table showcasing natural oak wood grain and seamless rounded joinery. Comfortably seats up to 8 guests.",
     dimensions: '78"L x 38"W x 30"H | Tabletop Thickness: 1.5"',
@@ -179,9 +203,13 @@ export const productsData: Product[] = [
     name: "Winston Dining Table - 48\"",
     category: "Dining Room",
     categorySlug: "dining-tables",
-    price: "$2,495 CAD",
-    numericPrice: 2495,
-    tag: "POPULAR",
+    price: "$1,895 CAD",
+    numericPrice: 1895,
+    originalPrice: "$2,495 CAD",
+    numericOriginalPrice: 2495,
+    isOnSale: true,
+    discountBadge: "24% OFF",
+    tag: "MEMBER DEAL",
     description:
       "Mid-century modern round pedestal table with a slatted solid wood cone base and durable matte ceramic white tabletop.",
     dimensions: '48" Diameter x 30"H',
@@ -202,9 +230,13 @@ export const productsData: Product[] = [
     name: "Angelo Leather Dining Chair",
     category: "Dining Room",
     categorySlug: "dining-chairs",
-    price: "$895 CAD",
-    numericPrice: 895,
-    tag: "FEATURED",
+    price: "$695 CAD",
+    numericPrice: 695,
+    originalPrice: "$895 CAD",
+    numericOriginalPrice: 895,
+    isOnSale: true,
+    discountBadge: "22% OFF",
+    tag: "SALE",
     description:
       "Curved tub dining chair with brass accent legs and soft top-grain Italian leather cushioning.",
     dimensions: '22"W x 23"D x 31"H',
@@ -247,9 +279,13 @@ export const productsData: Product[] = [
     name: "Épure Bouclé Platform Bed",
     category: "Bedroom",
     categorySlug: "beds-headboards",
-    price: "$3,295 CAD",
-    numericPrice: 3295,
-    tag: "BESTSELLER",
+    price: "$2,495 CAD",
+    numericPrice: 2495,
+    originalPrice: "$3,295 CAD",
+    numericOriginalPrice: 3295,
+    isOnSale: true,
+    discountBadge: "24% OFF",
+    tag: "CURATED SALE",
     description:
       "Low-profile padded platform bed with an oversized wingback headboard wrapped in plush textured bouclé fabric.",
     dimensions: '88"W x 92"L x 44"H (Queen)',
@@ -269,9 +305,13 @@ export const productsData: Product[] = [
     name: "Sculptural Solid Oak Executive Desk",
     category: "Office",
     categorySlug: "desks",
-    price: "$2,495 CAD",
-    numericPrice: 2495,
-    tag: "EXECUTIVE",
+    price: "$1,995 CAD",
+    numericPrice: 1995,
+    originalPrice: "$2,495 CAD",
+    numericOriginalPrice: 2495,
+    isOnSale: true,
+    discountBadge: "20% OFF",
+    tag: "EXECUTIVE SALE",
     description:
       "Minimalist writing desk with rounded pill-shaped oak legs, hidden wire grommet, and felt-lined drawer.",
     dimensions: '66"L x 30"W x 30"H',
@@ -291,9 +331,13 @@ export const productsData: Product[] = [
     name: "Lumière Travertine Arch Floor Lamp",
     category: "Lighting",
     categorySlug: "floor-lamps",
-    price: "$950 CAD",
-    numericPrice: 950,
-    tag: "STATEMENT",
+    price: "$695 CAD",
+    numericPrice: 695,
+    originalPrice: "$950 CAD",
+    numericOriginalPrice: 950,
+    isOnSale: true,
+    discountBadge: "27% OFF",
+    tag: "LIGHTING SALE",
     description:
       "Dramatic overhead brass arch lamp anchored by a solid travertine stone base with opal glass dome shade.",
     dimensions: '82"H x 48" Reach | Base: 14" Diameter',
@@ -313,9 +357,13 @@ export const productsData: Product[] = [
     name: "Solstice Hand-Tufted Wool Area Rug",
     category: "Decor",
     categorySlug: "rugs",
-    price: "$1,295 CAD",
-    numericPrice: 1295,
-    tag: "LUXURY TEXTILES",
+    price: "$895 CAD",
+    numericPrice: 895,
+    originalPrice: "$1,295 CAD",
+    numericOriginalPrice: 1295,
+    isOnSale: true,
+    discountBadge: "31% OFF",
+    tag: "TEXTILE SALE",
     description:
       "Organic asymmetrical carved pile rug hand-tufted from 100% New Zealand wool.",
     dimensions: '8\' x 10\'',
@@ -342,4 +390,8 @@ export function getProductsByCategorySlug(slug: string): Product[] {
       p.categorySlug === slug ||
       p.category.toLowerCase().replace(/\s+/g, "-") === slug.toLowerCase()
   );
+}
+
+export function getSaleProducts(): Product[] {
+  return productsData.filter((p) => p.isOnSale);
 }
