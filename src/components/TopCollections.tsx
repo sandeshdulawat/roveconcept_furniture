@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -46,22 +46,49 @@ export const collectionItems: CollectionItem[] = [
 
 export const TopCollections: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const itemsPerPage = 3;
-  const maxIndex = Math.max(0, collectionItems.length - itemsPerPage);
+  // Responsive visible items count: 3 on desktop, 2 on tablet, 1 on mobile
+  const [visibleItems, setVisibleItems] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setVisibleItems(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleItems(2);
+      } else {
+        setVisibleItems(3);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, collectionItems.length - visibleItems);
+
+  const triggerAnimation = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 600);
+  };
 
   const handlePrev = () => {
+    triggerAnimation();
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
   };
 
   const handleNext = () => {
+    triggerAnimation();
     setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
   };
 
   const progressPercentage = ((currentIndex + 1) / (maxIndex + 1)) * 100;
 
   return (
-    <section className="w-full bg-[#EFECE6] text-zinc-900 py-12 lg:py-16 px-4 sm:px-8">
+    <section className="w-full bg-[#FFFFFF] text-zinc-900 py-12 lg:py-16 px-4 sm:px-8">
       {/* Standard Content Width Limit (max-width: 1440px) */}
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -89,7 +116,7 @@ export const TopCollections: React.FC = () => {
               <div className="flex items-center justify-between">
                 <button
                   onClick={handlePrev}
-                  className="p-2 text-zinc-700 hover:text-zinc-950 transition-colors focus:outline-none"
+                  className="p-2.5 text-zinc-700 hover:text-zinc-950 transition-all hover:scale-110 focus:outline-none"
                   aria-label="Previous Collection Items"
                 >
                   <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
@@ -97,7 +124,7 @@ export const TopCollections: React.FC = () => {
 
                 <button
                   onClick={handleNext}
-                  className="p-2 text-zinc-700 hover:text-zinc-950 transition-colors focus:outline-none"
+                  className="p-2.5 text-zinc-700 hover:text-zinc-950 transition-all hover:scale-110 focus:outline-none"
                   aria-label="Next Collection Items"
                 >
                   <ChevronRight className="w-5 h-5 stroke-[1.5]" />
@@ -106,29 +133,38 @@ export const TopCollections: React.FC = () => {
 
               <div className="w-full h-[2px] bg-zinc-300 relative overflow-hidden">
                 <div
-                  className="h-full bg-zinc-800 transition-all duration-300"
+                  className="h-full bg-zinc-800 transition-all duration-500 ease-out"
                   style={{ width: `${progressPercentage}%` }}
                 />
               </div>
             </div>
           </div>
 
-          {/* PRODUCT CARDS WITH PRODUCT DETAIL LINKS */}
-          <div className="lg:col-span-3 overflow-hidden">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-transform duration-500 ease-out">
-              {collectionItems
-                .slice(currentIndex, currentIndex + itemsPerPage)
-                .map((item) => (
+          {/* ANIMATED CAROUSEL SLIDER CONTAINER */}
+          <div className="lg:col-span-3 overflow-hidden relative">
+            <div
+              className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+              style={{
+                transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
+              }}
+            >
+              {collectionItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="w-full sm:w-1/2 lg:w-1/3 shrink-0 px-2 sm:px-3"
+                >
                   <Link
-                    key={item.id}
                     href={`/product/${item.id}`}
-                    className="group relative aspect-[3/4] min-h-[380px] sm:min-h-[460px] overflow-hidden rounded-xs cursor-pointer select-none bg-zinc-200 block"
+                    className="group relative aspect-[3/4] min-h-[380px] sm:min-h-[460px] overflow-hidden rounded-xs cursor-pointer select-none bg-zinc-200 block shadow-sm"
                   >
+                    {/* Image with zoom and smooth crossfade transition */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"
+                      className={`w-full h-full object-cover object-center group-hover:scale-108 transition-all duration-700 ease-out brightness-95 group-hover:brightness-100 ${
+                        isTransitioning ? "scale-105 opacity-90 filter blur-[1px]" : "scale-100 opacity-100 blur-0"
+                      }`}
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
@@ -143,7 +179,8 @@ export const TopCollections: React.FC = () => {
                       </span>
                     </div>
                   </Link>
-                ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
