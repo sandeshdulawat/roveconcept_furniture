@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: "SHOP", href: "/shop", hasMega: true, subtitle: "Full Luxury Catalog" },
     { name: "SALE", href: "/sale", badge: "NEW", subtitle: "Curated Offers & Exclusives", hasMega: false },
-    { name: "LIFESTYLE", href: "/", hasMega: true, subtitle: "Interior Inspiration" },
+    { name: "LIFESTYLE", href: "/lifestyle", hasMega: true, subtitle: "Interior Inspiration & Journal" },
     { name: "DISCOVER", href: "/", hasMega: false, subtitle: "Brand Philosophy" },
     { name: "SHOWROOM", href: "/", hasMega: false, subtitle: "Visit Our Spaces" },
     { name: "OUTLET", href: "/sale", hasMega: false, subtitle: "Exclusive Archival Pieces" },
@@ -304,11 +304,11 @@ export const Navbar: React.FC = () => {
                     Inspiration
                   </h4>
                   <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Interior Trends</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Makeovers</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Design Inspiration</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Seasonal Collections</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Color Palettes</Link></li>
+                    <li><Link href="/lifestyle?section=inspiration&topic=Interior+Trends" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Interior Trends</Link></li>
+                    <li><Link href="/lifestyle?section=inspiration&topic=Room+Makeovers" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Makeovers</Link></li>
+                    <li><Link href="/lifestyle?section=inspiration" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Design Inspiration</Link></li>
+                    <li><Link href="/lifestyle?section=inspiration" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Seasonal Collections</Link></li>
+                    <li><Link href="/lifestyle?section=inspiration&topic=Color+Palettes" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Color Palettes</Link></li>
                   </ul>
                 </div>
 
@@ -318,11 +318,11 @@ export const Navbar: React.FC = () => {
                     Guides
                   </h4>
                   <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Buying Guides</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Furniture Care</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Material Guide</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Size & Layout Guide</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Styling Tips</Link></li>
+                    <li><Link href="/lifestyle?section=guides" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Buying Guides</Link></li>
+                    <li><Link href="/lifestyle?section=guides&topic=Furniture+Care" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Furniture Care</Link></li>
+                    <li><Link href="/lifestyle?section=guides" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Material Guide</Link></li>
+                    <li><Link href="/lifestyle?section=guides&topic=Size+%26+Layout+Guide" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Size & Layout Guide</Link></li>
+                    <li><Link href="/lifestyle?section=guides" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Styling Tips</Link></li>
                   </ul>
                 </div>
 
@@ -332,11 +332,11 @@ export const Navbar: React.FC = () => {
                     Stories
                   </h4>
                   <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Designer Interviews</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Customer Homes</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Behind the Craft</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Artisan Stories</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Brand Journal</Link></li>
+                    <li><Link href="/lifestyle?section=stories&topic=Designer+Interviews" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Designer Interviews</Link></li>
+                    <li><Link href="/lifestyle?section=stories&topic=Customer+Homes" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Customer Homes</Link></li>
+                    <li><Link href="/lifestyle?section=stories&topic=Behind+the+Craft" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Behind the Craft</Link></li>
+                    <li><Link href="/lifestyle?section=stories" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Artisan Stories</Link></li>
+                    <li><Link href="/lifestyle?section=stories" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Brand Journal</Link></li>
                   </ul>
                 </div>
 
@@ -346,11 +346,11 @@ export const Navbar: React.FC = () => {
                     Resources
                   </h4>
                   <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Lookbooks</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Planner</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Catalog Download</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Fabric Swatches</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Finish Samples</Link></li>
+                    <li><Link href="/lifestyle?section=resources&topic=Lookbooks" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Lookbooks</Link></li>
+                    <li><Link href="/lifestyle?section=resources" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Room Planner</Link></li>
+                    <li><Link href="/lifestyle?section=resources" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Catalog Download</Link></li>
+                    <li><Link href="/lifestyle?section=resources" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Fabric Swatches</Link></li>
+                    <li><Link href="/lifestyle?section=resources" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Finish Samples</Link></li>
                   </ul>
                 </div>
 
@@ -360,11 +360,11 @@ export const Navbar: React.FC = () => {
                     Community
                   </h4>
                   <ul className="space-y-2 text-[11px] lg:text-xs tracking-wider font-light text-white/80">
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">New Arrivals</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Featured Spaces</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Events</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Collaborations</Link></li>
-                    <li><Link href="/" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Press</Link></li>
+                    <li><Link href="/lifestyle?section=community" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">New Arrivals</Link></li>
+                    <li><Link href="/lifestyle?section=community&topic=Featured+Spaces" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Featured Spaces</Link></li>
+                    <li><Link href="/lifestyle?section=community" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Events</Link></li>
+                    <li><Link href="/lifestyle?section=community" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Collaborations</Link></li>
+                    <li><Link href="/lifestyle?section=community" onClick={() => setActiveNavHover(null)} className="hover:text-amber-200 transition-colors block py-0.5">Press</Link></li>
                   </ul>
                 </div>
 
@@ -382,7 +382,7 @@ export const Navbar: React.FC = () => {
                     </p>
                   </div>
                   <Link
-                    href="/product/luca-curved-sectional"
+                    href="/lifestyle?section=stories&article=architectural-sanctuary"
                     onClick={() => setActiveNavHover(null)}
                     className="inline-flex items-center space-x-1.5 text-[10px] font-medium tracking-[0.2em] text-white uppercase hover:text-amber-200 transition-colors pt-2 border-t border-white/10"
                   >
