@@ -11,14 +11,11 @@ import {
   X,
   ChevronDown,
   ChevronRight,
-  Sparkles,
   LogIn,
   ArrowRight,
-  Heart,
   Globe,
 } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
-import { WishlistDrawer } from "@/components/WishlistDrawer";
 import { LanguageModal } from "@/components/LanguageModal";
 
 export const Navbar: React.FC = () => {
@@ -31,8 +28,6 @@ export const Navbar: React.FC = () => {
     toggleCurrencyModal,
     language,
     toggleLanguageModal,
-    wishlist,
-    toggleWishlistModal,
     activeNavHover,
     setActiveNavHover,
     openAuthModal,
@@ -96,10 +91,7 @@ export const Navbar: React.FC = () => {
         onMouseLeave={handleMouseLeaveNav}
         className="fixed top-0 left-0 w-full z-40 text-white glass-header transition-all duration-300"
       >
-        {/* ========================================================
-            DESKTOP HEADER LAYOUT (hidden md:block)
-            Large Desktop Width Constraint (max-width: 1600px)
-           ======================================================== */}
+        {/* DESKTOP HEADER LAYOUT (hidden md:block) */}
         <div className="hidden md:block">
           {/* Top Utility Bar */}
           <div className="max-w-[1600px] mx-auto px-6 lg:px-8 pt-4 pb-2 flex items-center justify-between">
@@ -127,7 +119,7 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
 
-            {/* Right: Language, Currency, Wishlist, User Account, Shopping Bag */}
+            {/* Right: Language, Currency, User Account, Shopping Bag */}
             <div className="flex items-center space-x-5">
               {/* Language Switcher */}
               <button
@@ -148,19 +140,6 @@ export const Navbar: React.FC = () => {
               >
                 <span className="font-medium text-xs tracking-wider">{currency}</span>
                 <ChevronDown className="w-3 h-3 opacity-80" />
-              </button>
-
-              {/* Wishlist Heart Icon */}
-              <button
-                onClick={toggleWishlistModal}
-                className="flex items-center space-x-1 hover:opacity-80 transition-opacity focus:outline-none text-shadow-nav relative group"
-                aria-label="Saved Favorites"
-                title="Saved Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.length > 0 ? "fill-red-400 text-red-400" : "stroke-[1.5]"}`} />
-                {wishlist.length > 0 && (
-                  <span className="text-xs font-semibold text-red-400">{wishlist.length}</span>
-                )}
               </button>
 
               {/* User Account / Profile Icon */}
@@ -223,7 +202,6 @@ export const Navbar: React.FC = () => {
               className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-white/15 text-white py-10 px-8 lg:px-12 transition-all duration-300 shadow-2xl animate-fade-in z-50 max-h-[85vh] overflow-y-auto"
             >
               <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-6 text-left">
-                {/* 1. Living Room */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Living Room
@@ -237,7 +215,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 2. Dining Room */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Dining Room
@@ -251,7 +228,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 3. Bedroom */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Bedroom
@@ -265,7 +241,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 4. Office */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Office
@@ -279,7 +254,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 5. Lighting */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Lighting
@@ -293,7 +267,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 6. Decor */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Decor
@@ -307,7 +280,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 7. Featured Collection Card */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 p-5 rounded-xs border border-white/15 flex flex-col justify-between space-y-4">
                   <div>
                     <span className="text-[9px] tracking-[0.22em] uppercase font-semibold text-amber-300 block">
@@ -340,7 +312,6 @@ export const Navbar: React.FC = () => {
               className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-white/15 text-white py-10 px-8 lg:px-12 transition-all duration-300 shadow-2xl animate-fade-in z-50 max-h-[85vh] overflow-y-auto"
             >
               <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 text-left">
-                {/* 1. Inspiration */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Inspiration
@@ -354,7 +325,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 2. Guides */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Guides
@@ -368,7 +338,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 3. Stories */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Stories
@@ -382,7 +351,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 4. Resources */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Resources
@@ -396,7 +364,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 5. Community */}
                 <div className="space-y-3">
                   <h4 className="text-[11px] font-semibold tracking-[0.22em] text-white/60 uppercase border-b border-white/10 pb-1.5">
                     Community
@@ -410,7 +377,6 @@ export const Navbar: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* 6. Featured Story Card */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 p-5 rounded-xs border border-white/15 flex flex-col justify-between space-y-4">
                   <div>
                     <span className="text-[9px] tracking-[0.22em] uppercase font-semibold text-amber-300 block">
@@ -437,11 +403,8 @@ export const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* ========================================================
-            MOBILE HEADER BAR (block md:hidden)
-           ======================================================== */}
+        {/* MOBILE HEADER BAR (block md:hidden) */}
         <div className="md:hidden px-4 py-3.5 flex items-center justify-between">
-          {/* Mobile Logo Link to Home Page (/) */}
           <Link href="/" className="focus:outline-none" aria-label="Go to Home Page">
             <span className="text-lg font-light tracking-[0.2em] text-shadow-nav">
               <strong className="font-semibold tracking-[0.2em]">ROVE</strong>
@@ -450,14 +413,6 @@ export const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center space-x-3.5">
-            <button
-              onClick={toggleWishlistModal}
-              className="p-1 focus:outline-none text-shadow-nav relative"
-              aria-label="Saved Wishlist"
-            >
-              <Heart className={`w-5 h-5 ${wishlist.length > 0 ? "fill-red-400 text-red-400" : "stroke-[1.5]"}`} />
-            </button>
-
             <button
               onClick={handleUserClick}
               className="p-1 focus:outline-none text-shadow-nav"
@@ -486,17 +441,13 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Wishlist Drawer & Language Modal Overlay Mounts */}
-      <WishlistDrawer />
+      {/* Language Modal Overlay Mount */}
       <LanguageModal />
 
-      {/* ========================================================
-          LUXURY MOBILE MENU TRAY OVERLAY
-         ======================================================== */}
+      {/* LUXURY MOBILE MENU TRAY OVERLAY */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-zinc-950 text-white flex flex-col justify-between animate-mobile-tray overflow-y-auto h-[100dvh] w-full">
           <div className="px-5 py-4 flex items-center justify-between border-b border-white/15 bg-zinc-900 sticky top-0 z-20">
-            {/* Logo inside tray linking to Home Page (/) */}
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
@@ -622,6 +573,15 @@ export const Navbar: React.FC = () => {
                     className="text-[11px] tracking-wider uppercase text-white hover:underline"
                   >
                     My Orders
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setUserTrayView("wishlist");
+                    }}
+                    className="text-[11px] tracking-wider uppercase text-amber-300 hover:underline"
+                  >
+                    My Wishlist
                   </button>
                 </div>
               ) : (
