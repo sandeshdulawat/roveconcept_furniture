@@ -229,9 +229,9 @@ export const ShopCatalogView: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-start">
         {/* ========================================================
             DESKTOP STICKY SIDEBAR FILTER COLUMN (3 Cols)
-            - Pinned during scroll until bottom of product grid
+            - Pinned during scroll, scrollbar hidden with no-scrollbar
            ======================================================== */}
-        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto">
+        <aside className="hidden lg:block lg:col-span-3 space-y-8 pr-4 border-r border-white/10 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar">
           {/* Categories Filter list */}
           <div className="space-y-3">
             <h3 className="text-xs font-semibold tracking-[0.2em] text-white uppercase border-b border-white/10 pb-2">
