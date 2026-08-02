@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
 
 export interface Hotspot {
   id: string;
-  x: number; // percentage X
-  y: number; // percentage Y
+  x: number;
+  y: number;
   title: string;
   price: string;
+  productId: string;
 }
 
 export interface CraftedSlide {
@@ -30,9 +32,9 @@ export const craftedSlides: CraftedSlide[] = [
     description: "Innovative furniture for the future of living.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
     hotspots: [
-      { id: "h1", x: 42, y: 76, title: "Kiyomi Solid Oak Table", price: "$2,495 CAD" },
-      { id: "h2", x: 78, y: 68, title: "Lumière Modular Sofa", price: "$4,195 CAD" },
-      { id: "h3", x: 28, y: 72, title: "Sculptural Ceramic Bowl", price: "$320 CAD" },
+      { id: "h1", x: 42, y: 76, title: "Kiyomi Solid Oak Table", price: "$2,495 CAD", productId: "kiyomi-dining-table" },
+      { id: "h2", x: 78, y: 68, title: "Lumière Modular Sofa", price: "$4,195 CAD", productId: "luca-curved-sectional" },
+      { id: "h3", x: 28, y: 72, title: "Sculptural Ceramic Bowl", price: "$320 CAD", productId: "aura-boucle-accent-chair" },
     ],
   },
   {
@@ -43,8 +45,8 @@ export const craftedSlides: CraftedSlide[] = [
     description: "Sustainably sourced woods and hand-finished textures.",
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
     hotspots: [
-      { id: "h4", x: 50, y: 60, title: "Aura Boucle Lounge Chair", price: "$1,495 CAD" },
-      { id: "h5", x: 30, y: 45, title: "Travertine Floor Lamp", price: "$850 CAD" },
+      { id: "h4", x: 50, y: 60, title: "Aura Boucle Lounge Chair", price: "$1,495 CAD", productId: "aura-boucle-accent-chair" },
+      { id: "h5", x: 30, y: 45, title: "Travertine Floor Lamp", price: "$850 CAD", productId: "winston-dining-table-48" },
     ],
   },
   {
@@ -55,7 +57,7 @@ export const craftedSlides: CraftedSlide[] = [
     description: "Tailored Italian upholstery with FSC® certified hardwood frames.",
     image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
     hotspots: [
-      { id: "h6", x: 65, y: 70, title: "Milo Velvet Sectional", price: "$3,895 CAD" },
+      { id: "h6", x: 65, y: 70, title: "Milo Velvet Sectional", price: "$3,895 CAD", productId: "dresden-sectional-sofa" },
     ],
   },
   {
@@ -66,7 +68,7 @@ export const craftedSlides: CraftedSlide[] = [
     description: "Master artisanal joinery handcrafted in small batches.",
     image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80",
     hotspots: [
-      { id: "h7", x: 45, y: 65, title: "Walnut Dining Credenza", price: "$2,995 CAD" },
+      { id: "h7", x: 45, y: 65, title: "Walnut Dining Credenza", price: "$2,995 CAD", productId: "kiyomi-dining-table" },
     ],
   },
 ];
@@ -83,9 +85,7 @@ export const CraftedSection: React.FC = () => {
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
           
-          {/* ========================================================
-              LEFT COLUMN: Editorial Typography & Links (4 Cols)
-             ======================================================== */}
+          {/* LEFT COLUMN: Editorial Typography & Links */}
           <div className="lg:col-span-4 space-y-6 flex flex-col justify-center pb-4">
             <div className="space-y-2">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.15] text-zinc-900 tracking-tight">
@@ -103,23 +103,20 @@ export const CraftedSection: React.FC = () => {
             </p>
 
             <div className="pt-4">
-              <a
-                href="#collection"
+              <Link
+                href={`/product/luca-curved-sectional`}
                 className="inline-flex items-center space-x-2 text-xs font-medium tracking-widest text-zinc-900 hover:text-[#B38E3D] transition-colors border-b border-zinc-900 hover:border-[#B38E3D] pb-1 uppercase group"
               >
                 <span className="w-2 h-2 rounded-full border border-zinc-900 group-hover:border-[#B38E3D] group-hover:bg-[#B38E3D] transition-all" />
                 <span>Explore new collection</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* ========================================================
-              CENTER COLUMN: Main Interactive Showcase Image + Hotspots (7 Cols)
-             ======================================================== */}
+          {/* CENTER COLUMN: Main Interactive Showcase Image + Hotspots */}
           <div className="lg:col-span-7 relative">
             <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-xs shadow-sm bg-zinc-300 group">
-              {/* Main Featured Image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 key={currentSlide.image}
@@ -128,12 +125,10 @@ export const CraftedSection: React.FC = () => {
                 className="w-full h-full object-cover object-center transition-all duration-700 scale-100 group-hover:scale-102"
               />
 
-              {/* Vertical Metadata Label Tag (Top-left) */}
               <div className="absolute top-4 left-4 z-20 bg-black/40 backdrop-blur-md px-3 py-1 rounded-xs text-[10px] sm:text-xs font-mono text-white/90 tracking-wider">
                 {currentSlide.tag}
               </div>
 
-              {/* Interactive Product Hotspot Pins */}
               {currentSlide.hotspots.map((hs) => {
                 const isOpen = activeHotspot === hs.id;
                 return (
@@ -161,12 +156,12 @@ export const CraftedSection: React.FC = () => {
                         <p className="text-[11px] text-amber-300 font-semibold mt-0.5">
                           {hs.price}
                         </p>
-                        <a
-                          href="#"
+                        <Link
+                          href={`/product/${hs.productId}`}
                           className="inline-block mt-2 text-[10px] tracking-widest text-white/70 hover:text-white uppercase underline"
                         >
-                          View Piece
-                        </a>
+                          View Piece Details
+                        </Link>
                       </div>
                     )}
                   </div>
@@ -175,9 +170,7 @@ export const CraftedSection: React.FC = () => {
             </div>
           </div>
 
-          {/* ========================================================
-              RIGHT COLUMN: Vertical Thumbnail Selector (1 Col, Bottom Aligned, No Scroll)
-             ======================================================== */}
+          {/* RIGHT COLUMN: Vertical Thumbnail Selector */}
           <div className="lg:col-span-1 flex lg:flex-col gap-2.5 justify-end items-end h-full">
             {craftedSlides.map((slide, idx) => {
               const isActive = activeSlideIndex === idx;

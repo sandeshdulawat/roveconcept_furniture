@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronRight, Sparkles, LogIn } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
 
 export const Navbar: React.FC = () => {
+  const { data: session } = useSession();
   const {
     openSearch,
     toggleCart,
@@ -13,6 +15,9 @@ export const Navbar: React.FC = () => {
     toggleCurrencyModal,
     activeNavHover,
     setActiveNavHover,
+    openAuthModal,
+    toggleUserTray,
+    setUserTrayView,
   } = useUIStore();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,6 +30,14 @@ export const Navbar: React.FC = () => {
     { name: "SHOWROOM", hasMega: false, subtitle: "Visit Our Spaces" },
     { name: "OUTLET", hasMega: false, subtitle: "Exclusive Archival Pieces" },
   ];
+
+  const handleUserClick = () => {
+    if (session?.user) {
+      toggleUserTray();
+    } else {
+      openAuthModal();
+    }
+  };
 
   return (
     <>
@@ -72,12 +85,17 @@ export const Navbar: React.FC = () => {
                 <ChevronDown className="w-3 h-3 opacity-80" />
               </button>
 
-              {/* User Icon */}
+              {/* User Account / Profile Icon */}
               <button
-                className="hover:opacity-80 transition-opacity focus:outline-none text-shadow-nav"
+                onClick={handleUserClick}
+                className="flex items-center space-x-1.5 hover:opacity-80 transition-opacity focus:outline-none text-shadow-nav group"
                 aria-label="User Account"
+                title={session?.user ? `Logged in as ${session.user.name}` : "Login"}
               >
-                <User className="w-5 h-5 stroke-[1.5]" />
+                <User className="w-5 h-5 stroke-[1.5] group-hover:scale-105 transition-transform" />
+                {session?.user && (
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                )}
               </button>
 
               {/* Cart Icon with badge count */}
@@ -119,7 +137,7 @@ export const Navbar: React.FC = () => {
             </ul>
           </nav>
 
-          {/* Desktop Mega Menu Dropdown - Standard Content Width (max-width: 1440px) */}
+          {/* Desktop Mega Menu Dropdown */}
           {activeNavHover && (
             <div
               onMouseEnter={() => setActiveNavHover(activeNavHover)}
@@ -196,6 +214,14 @@ export const Navbar: React.FC = () => {
           </a>
 
           <div className="flex items-center space-x-4">
+            <button
+              onClick={handleUserClick}
+              className="p-1 focus:outline-none text-shadow-nav"
+              aria-label="User Account"
+            >
+              <User className="w-5 h-5 stroke-[1.5]" />
+            </button>
+
             <button
               onClick={toggleCart}
               className="flex items-center space-x-1 focus:outline-none text-shadow-nav"
@@ -328,10 +354,40 @@ export const Navbar: React.FC = () => {
                 <ChevronDown className="w-3 h-3" />
               </button>
 
-              <button className="flex items-center space-x-2 text-white/80 hover:text-white">
-                <User className="w-4 h-4" />
-                <span className="text-xs tracking-widest uppercase">My Account</span>
-              </button>
+              {/* Mobile Account / Login Button */}
+              {session?.user ? (
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setUserTrayView("profile");
+                    }}
+                    className="text-[11px] tracking-wider uppercase text-white hover:underline"
+                  >
+                    My Profile
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setUserTrayView("orders");
+                    }}
+                    className="text-[11px] tracking-wider uppercase text-white hover:underline"
+                  >
+                    My Orders
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openAuthModal();
+                  }}
+                  className="flex items-center space-x-2 text-white/80 hover:text-white border border-white/20 px-3 py-1.5 rounded-xs"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  <span className="text-xs tracking-widest uppercase">Member Login</span>
+                </button>
+              )}
             </div>
 
             <p className="text-[10px] text-center text-white/40 tracking-[0.2em] font-light">

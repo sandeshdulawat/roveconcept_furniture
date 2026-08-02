@@ -7,8 +7,8 @@ import { useUIStore } from "@/store/useUIStore";
 
 export const AuthModal: React.FC = () => {
   const { isAuthModalOpen, closeAuthModal, openUserTray } = useUIStore();
-  const [username, setUsername] = useState("user");
-  const [password, setPassword] = useState("user");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,10 +19,14 @@ export const AuthModal: React.FC = () => {
     setIsLoading(true);
     setError(null);
 
+    // Fallback to default 'user' if inputs are empty
+    const effectiveUsername = username.trim() || "user";
+    const effectivePassword = password.trim() || "user";
+
     try {
       const res = await signIn("credentials", {
-        username,
-        password,
+        username: effectiveUsername,
+        password: effectivePassword,
         redirect: false,
       });
 
@@ -107,8 +111,7 @@ export const AuthModal: React.FC = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required
-                placeholder="Enter username (user)"
+                placeholder="user"
                 className="w-full bg-white/5 border border-white/15 focus:border-white pl-9 pr-4 py-2.5 text-xs text-white placeholder-white/30 rounded-xs focus:outline-none transition-colors"
               />
             </div>
@@ -124,8 +127,7 @@ export const AuthModal: React.FC = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
-                placeholder="Enter password (user)"
+                placeholder="user"
                 className="w-full bg-white/5 border border-white/15 focus:border-white pl-9 pr-4 py-2.5 text-xs text-white placeholder-white/30 rounded-xs focus:outline-none transition-colors"
               />
             </div>
