@@ -34,13 +34,13 @@ export const collectionItems: CollectionItem[] = [
     id: "kiyomi-dining-table",
     title: "Kiyomi Solid Oak Table",
     linkText: "SHOP NOW",
-    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "luca-curved-sectional",
     title: "The Luca Curved Sofa",
     linkText: "SHOP NOW",
-    image: "https://images.unsplash.com/photo-1664711942326-2c3351e215e6?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfHx8Mg%3D%3D",
   },
 ];
 
